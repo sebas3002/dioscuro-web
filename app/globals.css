@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 @theme {
+  --font-syne: var(--font-syne);
   --color-black-abyss: #0A0A0A;
   --color-obsidian-grey: #2B2B2B;
   --color-steel-fusion: #A6A6A6;
@@ -16,7 +17,7 @@
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif; /* Cambiaremos a Gótica después */
+  font-family: var(--font-syne), sans-serif;
   overflow-x: hidden;
 }
 
