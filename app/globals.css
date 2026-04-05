@@ -2,6 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
 @theme {
   --font-syne: var(--font-syne);
   --color-black-abyss: #0A0A0A;
@@ -25,4 +36,12 @@ body {
 ::selection {
   background-color: #8B0000;
   color: #ffffff;
+}
+
+nav {
+  padding-top: 2%;
+  padding-bottom: 2%;
+  background-color: #0A0A0A !important;
+  -webkit-backdrop-filter: none !important; /* Quita el blur si se ve gris */
+  backdrop-filter: none !important;
 }
