@@ -7,13 +7,11 @@ const Header = () => {
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
 
-  // URL DE TU LOGO EN SUPABASE
   const LOGO_URL = "https://okjasjwetailudcrvcau.supabase.co/storage/v1/object/public/assets/DIOSCURO2.webp";
 
   useEffect(() => {
     const controlNavbar = () => {
       if (typeof window !== 'undefined') {
-        // Oculta el menú al bajar, lo muestra al subir
         if (window.scrollY > lastScrollY && window.scrollY > 80) {
           setIsVisible(false);
         } else {
@@ -34,13 +32,11 @@ const Header = () => {
     { name: 'ACCOUNT', icon: <User size={20} />, href: '#' },
   ];
 
-  // PALETA DE COLORES DIOSCURO
   const colorHueso = "#E5E5E1"; 
   const colorFondo = "rgba(10, 10, 10, 0.9)";
 
   return (
     <>
-      {/* HEADER SUPERIOR (Escritorio y Logo) */}
       <nav style={{
         position: 'fixed',
         top: 0,
@@ -52,29 +48,35 @@ const Header = () => {
         borderBottom: `1px solid ${colorHueso}15`,
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'space-between',
-        padding: '0 6%',
         zIndex: 1000,
         transition: 'transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
         transform: isVisible ? 'translateY(0)' : 'translateY(-100%)',
-      }}>
+      }} className="nav-container">
         
-        {/* LOGO DIOSCURO */}
-        <div style={{ display: 'flex', alignItems: 'center' }}>
+        {/* CONTENEDOR DEL LOGO: Aquí aplicamos la lógica de centrado */}
+        <div className="logo-wrapper" style={{
+          display: 'flex',
+          alignItems: 'center',
+          flex: 1
+        }}>
           <img 
             src={LOGO_URL} 
             alt="DIOSCURO" 
             style={{ 
               height: '55px', 
               width: 'auto', 
-              filter: 'invert(1)', // Hace que el logo sea color hueso
+              filter: 'invert(1)',
               objectFit: 'contain'
             }} 
           />
         </div>
 
         {/* LINKS ESCRITORIO */}
-        <div className="nav-desktop" style={{ display: 'flex', gap: '35px' }}>
+        <div className="nav-desktop" style={{ 
+          display: 'flex', 
+          gap: '35px',
+          justifyContent: 'flex-end'
+        }}>
           {navItems.map((item) => (
             <a key={item.name} href={item.href} style={{
               color: colorHueso,
@@ -92,7 +94,7 @@ const Header = () => {
       </nav>
 
       {/* BARRA INFERIOR (Móvil) */}
-      <div className="nav-mobile" style={{
+      <div className="nav-mobile-bottom" style={{
         position: 'fixed',
         bottom: 0,
         left: 0,
@@ -107,27 +109,42 @@ const Header = () => {
         paddingBottom: 'env(safe-area-inset-bottom)',
       }}>
         {navItems.map((item) => (
-          <a key={item.name} href={item.href} style={{ 
-            color: colorHueso, 
-            opacity: 0.7,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center'
-          }}>
+          <a key={item.name} href={item.href} style={{ color: colorHueso, opacity: 0.7 }}>
             {item.icon}
           </a>
         ))}
       </div>
 
-      {/* CONTROL DE VISIBILIDAD POR PANTALLA */}
       <style jsx>{`
-        @media (max-width: 768px) {
-          .nav-desktop { display: none !important; }
-          .nav-mobile { display: flex !important; }
+        .nav-container {
+          padding: 0 6%;
         }
+        
+        @media (max-width: 768px) {
+          .nav-container {
+            justify-content: center; /* Centra el contenido en móvil */
+          }
+          .logo-wrapper {
+            justify-content: center; /* Centra el logo en móvil */
+          }
+          .nav-desktop {
+            display: none !important;
+          }
+          .nav-mobile-bottom {
+            display: flex !important;
+          }
+        }
+
         @media (min-width: 769px) {
-          .nav-mobile { display: none !important; }
-          .nav-desktop { display: flex !important; }
+          .logo-wrapper {
+            justify-content: flex-start; /* Alinea a la izquierda en desktop */
+          }
+          .nav-mobile-bottom {
+            display: none !important;
+          }
+          .nav-desktop {
+            display: flex !important;
+          }
         }
       `}</style>
     </>
