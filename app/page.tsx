@@ -1,40 +1,64 @@
-import { createClient } from '@supabase/supabase-js'
+import Header from '../components/Header';
 
-// Inicializamos el cliente con las variables que ya pusiste en el .env.local
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-)
-
-export default async function Page() {
-  // Traemos el inventario real de la tabla que acabas de ver en Supabase
-  const { data: productos, error } = await supabase
-    .from('inventario')
-    .select('*')
-
-  if (error) {
-    return <div>Error cargando DIOSCURO: {error.message}</div>
-  }
-
+export default function Home() {
   return (
-    <main className="bg-black text-white p-8">
-      <h1 className="text-4xl font-bold italic text-center mb-12">DIOSCURO CDMX</h1>
+    <main style={{ backgroundColor: 'black', color: 'white', minHeight: '300vh', margin: 0, padding: 0 }}>
+      <Header />
       
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        {productos?.map((item) => (
-          <div key={item.sku} className="border border-zinc-800 p-4 rounded-lg">
-            <img src={item.imagen_url} alt={item.descripcion} className="w-full h-auto mb-4" />
-            <h2 className="text-xl font-bold">{item.descripcion}</h2>
-            <p className="text-zinc-400">SKU: {item.sku}</p>
-            <div className="flex justify-between mt-4 items-center">
-              <span className="text-2xl font-mono">${item.precio}</span>
-              <span className={`px-3 py-1 rounded ${item.stock > 0 ? 'bg-green-900' : 'bg-red-900'}`}>
-                Stock: {item.stock}
-              </span>
-            </div>
-          </div>
-        ))}
-      </div>
+      {/* SECCIÓN 1: HERO (Lo primero que se ve) */}
+      <section style={{
+        height: '100vh',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        textAlign: 'center',
+        borderBottom: '1px solid #111'
+      }}>
+        <h1 style={{ 
+          fontSize: 'clamp(3rem, 12vw, 10rem)', 
+          fontWeight: '900', 
+          fontStyle: 'italic', 
+          margin: 0,
+          lineHeight: 0.8
+        }}>
+          DIOSCURO
+        </h1>
+        <p style={{ 
+          marginTop: '20px', 
+          letterSpacing: '0.6em', 
+          color: '#444', 
+          textTransform: 'uppercase',
+          fontSize: '14px'
+        }}>
+          Tienda de ropa
+        </p>
+      </section>
+
+      {/* SECCIÓN 2: ESPACIO DE PRUEBA (Para forzar el scroll) */}
+      <section style={{
+        height: '100vh',
+        padding: '100px 5%',
+        display: 'flex',
+        alignItems: 'flex-start'
+      }}>
+        <div>
+          <h2 style={{ fontSize: '40px', fontWeight: '900', color: '#222' }}>
+            DROPS<br />RELEASES
+          </h2>
+          <p style={{ color: '#222', maxWidth: '400px', lineHeight: '1.6' }}>
+            Proximamente
+            pagina en construccion.
+          </p>
+        </div>
+      </section>
+
+      {/* SECCIÓN 3: PIE DE PÁGINA TEMPORAL */}
+      <section style={{ height: '100vh', backgroundColor: '#050505' }}>
+        <div style={{ padding: '5%', color: '#111', fontSize: '10vw', fontWeight: '900' }}>
+          END OF STACK
+        </div>
+      </section>
     </main>
-  )
+  );
 }
