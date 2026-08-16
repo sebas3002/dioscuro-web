@@ -60,7 +60,7 @@ const Header = () => {
 
         {/* BLOQUE CENTRAL */}
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-          <img src={LOGO_URL} alt="DIOSCURO" style={{ height: '90px', width: 'auto', objectFit: 'contain' }} />
+          <img src={LOGO_URL} alt="DIOSCURO" style={{ height: '45px', width: 'auto', objectFit: 'contain' }} />
         </div>
 
         {/* BLOQUE DERECHO (Con PADDING INTERNO para el carrito) */}
@@ -167,7 +167,7 @@ const Header = () => {
         <div></div>
         <div className="nav-left" style={{ display: 'flex', gap: '35px', alignItems: 'center', justifyContent: 'flex-start' }}>
           <a href="#" style={{ color: colorHueso, display: 'flex', alignItems: 'center' }} className="nav-link"><Search size={20} /></a>
-          <div className="dropdown" style={{ position: 'relative', paddingBottom: '15px', marginTop: '15px' }}>
+          <div className="dropdown" style={{ position: 'relative', paddingBottom: '15px' }}>
             <span style={{ ...textStyleDesktop, display: 'flex', alignItems: 'center', gap: '6px', cursor: 'pointer' }}>DROP <ChevronDown size={14} style={{ opacity: 0.8 }}/></span>
             <div className="dropdown-menu">
               <a href="#">DOG CLUB</a>
@@ -179,7 +179,7 @@ const Header = () => {
           <a href="#" className="nav-link" style={textStyleDesktop}>GALERÍA</a>
         </div>
         <div className="nav-logo" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-          <img src={LOGO_URL} alt="DIOSCURO" style={{ height: '125px', width: 'auto', objectFit: 'contain', display: 'block' }} />
+          <img src={LOGO_URL} alt="DIOSCURO" style={{ height: '60px', width: 'auto', objectFit: 'contain', display: 'block' }} />
         </div>
         <div className="nav-right" style={{ display: 'flex', gap: '35px', alignItems: 'center', justifyContent: 'flex-end' }}>
           <a href="#" className="nav-link" style={textStyleDesktop}>CONTACTO</a>
