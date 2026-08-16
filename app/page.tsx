@@ -3,8 +3,8 @@
 import Header from '../components/Header';
 
 export default function Home() {
-  const VIDEO_URL = "https://vheznlfbhpwzthwklbid.supabase.co/storage/v1/object/public/contenido-dioscuro/video1.mp4"; 
-  
+  const VIDEO_URL = "https://vheznlfbhpwzthwklbid.supabase.co/storage/v1/object/public/contenido-dioscuro/2.mp4"; 
+
   const colorHueso = "#E5E5E1";
 
   return (
