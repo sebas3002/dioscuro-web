@@ -3,7 +3,8 @@
 import Header from '../components/Header';
 
 export default function Home() {
-  const VIDEO_URL = "https://okjasjwetailudcrvcau.supabase.co/storage/v1/object/public/assets/said%20PLAYERA%20GALLO.mp4"; 
+  const VIDEO_URL = "https://vheznlfbhpwzthwklbid.supabase.co/storage/v1/object/public/contenido-dioscuro/video1.mp4"; 
+  
   const colorHueso = "#E5E5E1";
 
   return (
