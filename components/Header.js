@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { ShoppingCart, Search, Menu, User, Home, Layers, Cpu, Shirt, ChevronDown } from 'lucide-react';
 
 const Header = () => {
-  const LOGO_URL = "https://vheznlfbhpwzthwklbid.supabase.co/storage/v1/object/public/contenido-dioscuro/reallogo1.webp;
+  const LOGO_URL = "https://vheznlfbhpwzthwklbid.supabase.co/storage/v1/object/public/contenido-dioscuro/reallogo1.webp";
   const colorHueso = "#E5E5E1";
 
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
