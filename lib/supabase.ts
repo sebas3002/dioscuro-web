@@ -1,14 +1,7 @@
-import { createClient } from '@supabase/supabase-js'
+import { createClient } from '@supabase/supabase-js';
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-)
+// Extraemos las variables y le juramos a TypeScript (as string) que siempre existirán
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL as string;
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY as string;
 
-async function test() {
-  const { data, error } = await supabase.from('inventory').select('*').limit(1)
-  if (error) console.log("Error de conexión:", error.message)
-  else console.log("¡Conexión exitosa! Datos:", data)
-}
-
-test()
+export const supabase = createClient(supabaseUrl, supabaseAnonKey);
