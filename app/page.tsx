@@ -1,6 +1,6 @@
 "use client";
 
-import Header from '../components/Header';
+import Header from '../components/Header/';
 
 export default function Home() {
   const VIDEO_URL = "https://vheznlfbhpwzthwklbid.supabase.co/storage/v1/object/public/contenido-dioscuro/2.mp4"; 
@@ -113,7 +113,7 @@ export default function Home() {
               e.currentTarget.style.color = colorHueso;
             }}
             >
-              ACCEDER A DROPS
+              acs A DROPS
             </button>
           </div>
         </div>

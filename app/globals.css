@@ -13,3 +13,23 @@ body {
   margin: 0;
   background-color: black;
 }
+
+/* ==========================================================================
+   ORQUESTADOR DE NAVEGACIÓN (RESPONSIVO)
+   ========================================================================== */
+.desktop-wrapper { 
+  display: none !important; 
+}
+.mobile-wrapper { 
+  display: block !important; 
+}
+
+/* Cuando la pantalla supera los 768px (Tablets y Computadoras) */
+@media (min-width: 769px) {
+  .desktop-wrapper { 
+    display: block !important; 
+  }
+  .mobile-wrapper { 
+    display: none !important; 
+  }
+}
