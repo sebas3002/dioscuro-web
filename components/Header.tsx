@@ -136,13 +136,13 @@ const Header = () => {
               }}>
                 <a href="#" className="drawer-sub-link">DOG CLUB</a>
                 <a href="#" className="drawer-sub-link">NASTY BOYZ</a>
-                <a href="#" className="drawer-sub-link">PRUEBA 3</a>
+                <a href="#" className="drawer-sub-link">HUESOS ANCHOS</a>
                 <a href="#" className="drawer-sub-link">PRUEBA 4</a>
               </div>
             </div>
 
-            <a href="#" className="drawer-link">GALERÍA</a>
-            <a href="#" className="drawer-link">CONTACTO</a>
+            <a href="#" className="drawer-link">dsadas</a>
+            <a href="#" className="drawer-link">HUESOS ANCHOS</a>
           </div>
         </div>
       )}
@@ -182,7 +182,7 @@ const Header = () => {
           <img src={LOGO_URL} alt="DIOSCURO" style={{ height: '85px', width: 'auto', objectFit: 'contain', display: 'block' }} />
         </div>
         <div className="nav-right" style={{ display: 'flex', gap: '35px', alignItems: 'center', justifyContent: 'flex-end' }}>
-          <a href="#" className="nav-link" style={textStyleDesktop}>CONTACTO</a>
+          <a href="#" className="nav-link" style={textStyleDesktop}>HUESOS ANCHOS</a>
           <a href="#" className="nav-link" style={textStyleDesktop}>INICIAR SESIÓN</a>
           <a href="#" style={{ color: colorHueso, display: 'flex', alignItems: 'center' }} className="nav-link"><ShoppingCart size={20} /></a>
         </div>

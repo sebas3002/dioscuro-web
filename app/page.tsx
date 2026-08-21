@@ -87,7 +87,7 @@ export default function Home() {
             fontFamily: 'sans-serif',
             fontWeight: '400'
           }}>
-            Streetwear de alto rendimiento nacido en el caos de la CDMX. 
+            sebas de alto rendimiento nacido en el caos de la CDMX. 
             Elevamos el estándar de la moda local mediante materiales de grado industrial y diseño obsesivo.
           </p>
 
