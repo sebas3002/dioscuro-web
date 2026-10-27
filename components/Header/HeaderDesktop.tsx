@@ -1,84 +1,240 @@
 "use client";
 
-import React from 'react';
-import { ShoppingCart, Search, ChevronDown } from 'lucide-react';
+import React, { useEffect, useRef, useState } from "react";
+import { ShoppingCart, Search, ChevronDown } from "lucide-react";
 
 const HeaderDesktop = () => {
-  const LOGO_URL = "https://vheznlfbhpwzthwklbid.supabase.co/storage/v1/object/public/contenido-dioscuro/reallogo1.webp";
+    
+  const LOGO_URL =
+    "https://vheznlfbhpwzthwklbid.supabase.co/storage/v1/object/public/contenido-dioscuro/reallogo1.webp";
+
   const colorHueso = "#E5E5E1";
 
-  // Estilos de texto para Desktop
-  const textStyleDesktop: React.CSSProperties = {
+  const [isOpen, setIsOpen] = useState(false);
+  const dropRef = useRef<HTMLDivElement>(null);
+
+  // Cierra el dropdown al hacer clic fuera
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropRef.current &&
+        !dropRef.current.contains(event.target as Node)
+      ) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  const linkStyle: React.CSSProperties = {
     color: colorHueso,
-    textDecoration: 'none',
-    fontSize: 'clamp(11px, 1.05vw, 13px)', 
-    fontWeight: '900',
-    letterSpacing: '0.25em', 
-    textTransform: 'uppercase',
-    fontFamily: 'sans-serif',
-    whiteSpace: 'nowrap',
-    transition: 'opacity 0.3s ease'
+    textDecoration: "none",
+    fontSize: "12px",
+    fontWeight: "900",
+    letterSpacing: "0.25em",
+    textTransform: "uppercase",
+    fontFamily: "sans-serif",
+    whiteSpace: "nowrap",
+    userSelect: "none",
   };
 
   return (
-    <>
-      <nav className="header-desktop" style={{
-        position: 'fixed', top: 0, left: 0, width: '100%', height: '100px',
-        backgroundColor: 'rgba(0,0,0,0.95)', backdropFilter: 'blur(15px)',
-        borderBottom: `1px solid ${colorHueso}10`, zIndex: 2000, display: 'grid',
-        gridTemplateColumns: '10% 25% 30% 25% 10%', alignItems: 'center',
-      }}>
-        <div></div>
-        
-        <div className="nav-left" style={{ display: 'flex', gap: '35px', alignItems: 'center', justifyContent: 'flex-start' }}>
-          <a href="#" style={{ color: colorHueso, display: 'flex', alignItems: 'center' }} className="nav-link"><Search size={20} /></a>
-          <div className="dropdown" style={{ position: 'relative', padding: '15px 0' }}>
-            <span style={{ ...textStyleDesktop, display: 'flex', alignItems: 'center', gap: '6px', cursor: 'pointer' }}>
-              DROP <ChevronDown size={14} style={{ opacity: 0.8 }}/>
-            </span>
-            <div className="dropdown-menu">
-              <a href="#">DOG CLUB</a>
-              <a href="#">NASTY BOYZ</a>
-              <a href="#">PRUEBA 3</a>
-              <a href="#">PRUEBA 4</a>
-            </div>
-          </div>
-          <a href="#" className="nav-link" style={textStyleDesktop}>GALERÍA</a>
-        </div>
-        
-        <div className="nav-logo" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-          <img src={LOGO_URL} alt="DIOSCURO" style={{ height: '85px', width: 'auto', objectFit: 'contain', display: 'block' }} />
-        </div>
-        
-        <div className="nav-right" style={{ display: 'flex', gap: '35px', alignItems: 'center', justifyContent: 'flex-end' }}>
-          <a href="#" className="nav-link" style={textStyleDesktop}>HUESOS ANCHOS</a>
-          <a href="#" className="nav-link" style={textStyleDesktop}>INICIAR SESIÓN</a>
-          <a href="#" style={{ color: colorHueso, display: 'flex', alignItems: 'center' }} className="nav-link"><ShoppingCart size={20} /></a>
-        </div>
-        
-        <div></div>
-      </nav>
+    <nav
+      style={{
+        position: "fixed",
+        top: 0,
+        left: 0,
+        width: "100%",
+        height: "100px",
+        backgroundColor: "rgba(0,0,0,0.98)",
+        backdropFilter: "blur(15px)",
+        borderBottom: `1px solid ${colorHueso}15`,
+        zIndex: 99999,
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+        padding: "0 5%",
+      }}
+    >
+      {/* LADO IZQUIERDO */}
+      <div
+        style={{
+          display: "flex",
+          gap: "40px",
+          alignItems: "center",
+        }}
+      >
+        <a
+          href="#"
+          style={{
+            color: colorHueso,
+            display: "flex",
+          }}
+        >
+          <Search size={20} />
+        </a>
 
-      {/* ESTILOS AISLADOS (Solo para Escritorio) */}
-      <style jsx>{`
-        .nav-link { transition: opacity 0.3s ease; }
-        .nav-link:hover { opacity: 0.6; }
-        
-        .dropdown-menu {
-          display: none; position: absolute; top: 100%; left: 50%; transform: translateX(-50%);
-          background-color: #0a0a0a; border: 1px solid ${colorHueso}15; padding: 12px 0;
-          min-width: 220px; flex-direction: column; box-shadow: 0 20px 40px rgba(0,0,0,0.8);
-        }
-        .dropdown::before { content: ''; position: absolute; top: 100%; left: 0; width: 100%; height: 30px; display: none; }
-        .dropdown:hover::before { display: block; }
-        .dropdown:hover .dropdown-menu { display: flex; }
-        .dropdown-menu a {
-          color: ${colorHueso}80; text-decoration: none; font-size: 11px; font-weight: 800;
-          letter-spacing: 0.2em; text-transform: uppercase; padding: 14px 24px; display: block; font-family: sans-serif;
-        }
-        .dropdown-menu a:hover { color: ${colorHueso}; background-color: rgba(229, 229, 225, 0.05); padding-left: 28px; }
-      `}</style>
-    </>
+        {/* DROP */}
+        <div
+          ref={dropRef}
+          style={{
+            position: "relative",
+            display: "flex",
+            alignItems: "center",
+          }}
+        >
+          <button
+            type="button"
+            onClick={() => setIsOpen((prev) => !prev)}
+            style={{
+              ...linkStyle,
+              display: "flex",
+              alignItems: "center",
+              gap: "6px",
+              background: "transparent",
+              border: "none",
+              padding: "20px 0",
+              margin: 0,
+              cursor: "pointer",
+            }}
+          >
+            DROP
+
+            <ChevronDown
+              size={14}
+              style={{
+                transform: isOpen ? "rotate(180deg)" : "rotate(0deg)",
+                transition: "transform 0.2s ease",
+              }}
+            />
+          </button>
+
+          {/* MENÚ */}
+          {isOpen && (
+            <div
+              style={{
+                position: "absolute",
+                top: "70px",
+                left: "-20px",
+                width: "220px",
+                backgroundColor: "#050505",
+                border: `1px solid ${colorHueso}30`,
+                display: "flex",
+                flexDirection: "column",
+                padding: "10px 0",
+                boxShadow: "0 30px 60px rgba(0,0,0,0.95)",
+                zIndex: 1000000,
+              }}
+            >
+              <a
+                href="#"
+                style={{
+                  ...linkStyle,
+                  padding: "12px 20px",
+                  display: "block",
+                  borderBottom: `1px solid ${colorHueso}05`,
+                }}
+              >
+                DOG CLUB
+              </a>
+
+              <a
+                href="#"
+                style={{
+                  ...linkStyle,
+                  padding: "12px 20px",
+                  display: "block",
+                  borderBottom: `1px solid ${colorHueso}05`,
+                }}
+              >
+                NASTY BOYZ
+              </a>
+
+              <a
+                href="#"
+                style={{
+                  ...linkStyle,
+                  padding: "12px 20px",
+                  display: "block",
+                  borderBottom: `1px solid ${colorHueso}05`,
+                }}
+              >
+                PRUEBA 3
+              </a>
+
+              <a
+                href="#"
+                style={{
+                  ...linkStyle,
+                  padding: "12px 20px",
+                  display: "block",
+                }}
+              >
+                PRUEBA 4
+              </a>
+            </div>
+          )}
+        </div>
+
+        <a href="#" style={linkStyle}>
+          GALERÍA
+        </a>
+      </div>
+
+      {/* LOGO */}
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          position: "absolute",
+          left: "50%",
+          transform: "translateX(-50%)",
+        }}
+      >
+        <img
+          src={LOGO_URL}
+          alt="DIOSCURO"
+          style={{
+            height: "80px",
+            width: "auto",
+            objectFit: "contain",
+          }}
+        />
+      </div>
+
+      {/* LADO DERECHO */}
+      <div
+        style={{
+          display: "flex",
+          gap: "40px",
+          alignItems: "center",
+        }}
+      >
+        <a href="#" style={linkStyle}>
+          HUESOS ANCHOS
+        </a>
+
+        <a href="#" style={linkStyle}>
+          INICIAR SESIÓN
+        </a>
+
+        <a
+          href="#"
+          style={{
+            color: colorHueso,
+            display: "flex",
+          }}
+        >
+          <ShoppingCart size={20} />
+        </a>
+      </div>
+    </nav>
   );
 };
 
