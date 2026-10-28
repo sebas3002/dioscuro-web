@@ -1,5 +1,5 @@
 // app/page.tsx
-import CarouselDioscuro from "@/components/CarouselDioscuro"; // Ajusta la ruta si es necesario
+import CarouselDioscuro from "@/app/CarouselDioscuro"; // Ajusta la ruta si es necesario
 
 export default function Home() {
   return (
