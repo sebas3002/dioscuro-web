@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, PanInfo } from "framer-motion";
 
 // Endpoints de Supabase. El orden define el índice.
 const shirts = [
@@ -13,7 +13,7 @@ const shirts = [
 export default function CarouselDioscuro() {
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const handleDragEnd = (event, info) => {
+  const handleDragEnd = (event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
     const swipeThreshold = 50; 
     if (info.offset.x < -swipeThreshold && currentIndex < shirts.length - 1) {
       setCurrentIndex(currentIndex + 1);
