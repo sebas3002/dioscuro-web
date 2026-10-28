@@ -1,135 +1,85 @@
 "use client";
+import { useState } from "react";
+import { motion } from "framer-motion";
 
-import Header from '../components/Header/';
+// Endpoints de Supabase. El orden define el índice.
+const shirts = [
+  "https://vheznlfbhpwzthwklbid.supabase.co/storage/v1/object/public/contenido-dioscuro/contenido-web/NB321.webp",
+  "https://vheznlfbhpwzthwklbid.supabase.co/storage/v1/object/public/contenido-dioscuro/contenido-web/sad2w.webp",
+  "https://vheznlfbhpwzthwklbid.supabase.co/storage/v1/object/public/contenido-dioscuro/contenido-web/telarana.webp",
+  "https://vheznlfbhpwzthwklbid.supabase.co/storage/v1/object/public/contenido-dioscuro/contenido-web/virgen12.webp"
+];
 
-export default function Home() {
-  const VIDEO_URL = "https://vheznlfbhpwzthwklbid.supabase.co/storage/v1/object/public/contenido-dioscuro/2.mp4"; 
+export default function CarouselDioscuro() {
+  const [currentIndex, setCurrentIndex] = useState(0);
 
-  const colorHueso = "#E5E5E1";
+  const handleDragEnd = (event, info) => {
+    const swipeThreshold = 50; 
+    if (info.offset.x < -swipeThreshold && currentIndex < shirts.length - 1) {
+      setCurrentIndex(currentIndex + 1);
+    } else if (info.offset.x > swipeThreshold && currentIndex > 0) {
+      setCurrentIndex(currentIndex - 1);
+    }
+  };
 
   return (
-    <main style={{ backgroundColor: 'black', color: colorHueso, minHeight: '100vh', margin: 0, padding: 0 }}>
-      <Header />
+    <div className="relative w-full h-[700px] flex items-center justify-center overflow-hidden bg-[#e0deda]">
       
-      <section className="hero-section" style={{
-        display: 'flex',
-        flexDirection: 'column', // Forzamos el orden vertical para centrado total
-        minHeight: '100vh',
-        paddingTop: '90px', 
-        width: '100%',
-        backgroundColor: 'black'
-      }}>
-        
-        {/* CONTENEDOR DE VIDEO: Ocupa el 60% en desktop para impacto visual */}
-        <div style={{
-          width: '100%',
-          height: '60vh',
-          position: 'relative',
-          overflow: 'hidden',
-          borderBottom: `1px solid ${colorHueso}10`
-        }}>
-          <video 
-            autoPlay 
-            muted 
-            loop 
-            playsInline
-            preload="auto"
-            style={{
-              width: '100%',
-              height: '100%',
-              objectFit: 'cover',
-            }}
-          >
-            <source src={VIDEO_URL} type="video/mp4" />
-          </video>
-        </div>
+      {/* CAPA 0: Fondo base */}
+      <img 
+        src="https://vheznlfbhpwzthwklbid.supabase.co/storage/v1/object/public/contenido-dioscuro/contenido-web/fondo123.webp" 
+        alt="Fondo estético" 
+        // Si usas Next.js de manera óptima, esto debería ser un componente <Image priority />
+        className="absolute inset-0 w-full h-full object-cover z-0 opacity-100" 
+      />
 
-        {/* CONTENEDOR DE TEXTO: Centrado absoluto */}
-        <div style={{
-          flex: 1,
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center', // Centrado horizontal
-          textAlign: 'center',   // Centrado de texto
-          padding: '60px 5%',
-          backgroundColor: 'black'
-        }}>
-          <h2 style={{ 
-            fontSize: '12px', 
-            letterSpacing: '1em', 
-            color: '#555', 
-            marginBottom: '30px',
-            fontWeight: '800',
-            marginLeft: '1em' // Compensa el espacio del letter-spacing para centrado real
-          }}>
-            DIOSCURO CDMX
-          </h2>
-          
-          <h1 style={{ 
-            fontSize: 'clamp(3.5rem, 10vw, 8rem)', 
-            fontWeight: '900', 
-            fontStyle: 'italic', 
-            margin: 0, 
-            lineHeight: 0.8,
-            textTransform: 'uppercase',
-            letterSpacing: '-4px'
-          }}>
-            PRECISIÓN<br />URBANA
-          </h1>
+      {/* CAPA 10: Modelo de fondo */}
+      <img 
+        src="https://vheznlfbhpwzthwklbid.supabase.co/storage/v1/object/public/contenido-dioscuro/contenido-web/original.webp" 
+        alt="Modelo Base" 
+        className="absolute w-[350px] md:w-[450px] object-contain z-10 pointer-events-none" 
+      />
 
-          <p style={{ 
-            marginTop: '40px', 
-            fontSize: 'clamp(16px, 2vw, 20px)', // Texto más grande y legible
-            lineHeight: '1.6', 
-            color: '#BBB',
-            maxWidth: '700px', // Limita el ancho para que no se canse la vista
-            fontFamily: 'sans-serif',
-            fontWeight: '400'
-          }}>
-            sebas de alto rendimiento nacido en el caos de la CDMX. 
-            Elevamos el estándar de la moda local mediante materiales de grado industrial y diseño obsesivo.
-          </p>
+      {/* CAPA 20: Motor físico del carrusel */}
+      <div className="absolute inset-0 z-20 flex items-center justify-center">
+        {shirts.map((src, index) => {
+          const diff = index - currentIndex;
+          const isCenter = diff === 0;
 
-          <div style={{ marginTop: '50px' }}>
-            <button style={{
-              backgroundColor: 'transparent',
-              border: `2px solid ${colorHueso}`, // Borde más grueso
-              color: colorHueso,
-              padding: '20px 50px',
-              fontSize: '12px',
-              fontWeight: '900',
-              letterSpacing: '0.5em',
-              cursor: 'pointer',
-              textTransform: 'uppercase',
-              transition: 'all 0.3s ease'
-            }}
-            onMouseOver={(e) => {
-              e.currentTarget.style.backgroundColor = colorHueso;
-              e.currentTarget.style.color = 'black';
-            }}
-            onMouseOut={(e) => {
-              e.currentTarget.style.backgroundColor = 'transparent';
-              e.currentTarget.style.color = colorHueso;
-            }}
-            >
-              acs A DROPS
-            </button>
-          </div>
-        </div>
-      </section>
+          return (
+            <motion.img
+              key={src}
+              src={src}
+              alt={`DIOSCURO Prenda ${index}`}
+              className="absolute w-[350px] md:w-[450px] object-contain cursor-grab active:cursor-grabbing"
+              initial={false}
+              animate={{
+                x: diff * 220, 
+                scale: isCenter ? 1 : 0.75, 
+                opacity: Math.abs(diff) > 1 ? 0 : isCenter ? 1 : 0.4, 
+                zIndex: isCenter ? 25 : 20,
+              }}
+              transition={{ 
+                type: "spring", 
+                stiffness: 280, 
+                damping: 25   
+              }}
+              drag="x"
+              dragConstraints={{ left: 0, right: 0 }}
+              dragElastic={0.2}
+              onDragEnd={handleDragEnd}
+            />
+          );
+        })}
+      </div>
 
-      <style jsx>{`
-        @media (max-width: 768px) {
-          h1 {
-            font-size: 4rem !important;
-            letter-spacing: -2px !important;
-          }
-          div {
-            height: auto !important;
-          }
-        }
-      `}</style>
-    </main>
+      {/* CAPA 30: Manos en primer plano */}
+      <img 
+        src="https://vheznlfbhpwzthwklbid.supabase.co/storage/v1/object/public/contenido-dioscuro/contenido-web/manos.webp" 
+        alt="Manos en primer plano" 
+        className="absolute w-[350px] md:w-[450px] object-contain z-30 pointer-events-none drop-shadow-2xl" 
+      />
+      
+    </div>
   );
 }
