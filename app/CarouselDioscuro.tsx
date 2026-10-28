@@ -79,86 +79,10 @@ export default function CarouselDioscuro() {
 
         {/* Playera Central (Activa) */}
         <motion.div
-          key={`current-${currentIndex}`}
+          key={`current-wrapper-${currentIndex}`}
           drag="x"
           dragConstraints={{ left: 0, right: 0 }}
           dragElastic={0.2}
           onDragEnd={handleDragEnd}
           animate={controls}
           className="relative z-10 cursor-grab active:cursor-grabbing drop-shadow-2xl"
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.3 }}
-        >
-          <img
-            src={shirts[currentIndex].src}
-            alt={shirts[currentIndex].name}
-            className="w-72 h-auto object-contain select-none pointer-events-none drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]"
-            draggable="false"
-          />
-        </motion.div>
-
-        {/* Playera Siguiente (Fondo Derecha) */}
-        <motion.img
-          key={`next-${currentIndex}`}
-          src={shirts[(currentIndex + 1) % shirts.length].src}
-          className="absolute w-48 h-auto opacity-30 blur-[2px] translate-x-32 scale-75 select-none pointer-events-none"
-          initial={{ opacity: 0, x: 100, scale: 0.5 }}
-          animate={{ opacity: 0.3, x: 120, scale: 0.75 }}
-          transition={{ duration: 0.4 }}
-        />
-      </div>
-
-      {/* Información de la Playera Activa */}
-      <div className="mt-8 flex flex-col items-center text-white text-center z-20">
-        <motion.h2 
-          key={`name-${currentIndex}`}
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="text-xl font-bold tracking-widest uppercase mb-1"
-        >
-          {shirts[currentIndex].name}
-        </motion.h2>
-        <motion.p 
-          key={`price-${currentIndex}`}
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
-          className="text-sm text-gray-400 mb-6"
-        >
-          {shirts[currentIndex].price}
-        </motion.p>
-
-        {/* Controles e Indicador de Interacción */}
-        <div className="flex items-center gap-6">
-          <button 
-            onClick={prevSlide}
-            className="w-10 h-10 rounded-full border border-gray-600 flex items-center justify-center text-gray-400 hover:text-white hover:border-white transition-colors"
-          >
-            <ChevronLeft size={20} />
-          </button>
-          
-          <span className="text-xs tracking-[0.2em] text-gray-500 uppercase">
-            Desliza
-          </span>
-
-          <button 
-            onClick={nextSlide}
-            className="w-10 h-10 rounded-full border border-gray-600 flex items-center justify-center text-gray-400 hover:text-white hover:border-white transition-colors"
-          >
-            <ChevronRight size={20} />
-          </button>
-        </div>
-
-        {/* Botón de Compra */}
-        <motion.button
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          className="mt-8 px-12 py-3 bg-white text-black font-bold uppercase tracking-wider text-sm hover:bg-gray-200 transition-colors"
-        >
-          Comprar Ahora
-        </motion.button>
-      </div>
-    </div>
-  );
-}
