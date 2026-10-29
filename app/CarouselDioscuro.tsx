@@ -71,16 +71,17 @@ export default function CarouselDioscuro() {
           className="absolute w-[350px] md:w-[450px] object-contain z-10 pointer-events-none" 
         />
 
-        {/* CAPA 20: Playeras */}
+        {/* CAPA 15: Playera Anterior */}
         <motion.img
           key={`prev-${currentIndex}`}
           src={shirts[(currentIndex - 1 + shirts.length) % shirts.length].src}
-          className="absolute w-48 h-auto opacity-30 blur-[2px] -translate-x-32 scale-75 select-none pointer-events-none z-15"
+          className="absolute w-64 md:w-80 h-auto opacity-30 blur-[2px] -translate-x-32 md:-translate-x-40 scale-75 select-none pointer-events-none z-15"
           initial={{ opacity: 0, x: -100, scale: 0.5 }}
           animate={{ opacity: 0.3, x: -120, scale: 0.75 }}
           transition={{ duration: 0.4 }}
         />
 
+        {/* CAPA 20: Playera Central (Activa) */}
         <motion.div
           key={`current-wrapper-${currentIndex}`}
           drag="x"
@@ -88,13 +89,13 @@ export default function CarouselDioscuro() {
           dragElastic={0.2}
           onDragEnd={handleDragEnd}
           animate={controls}
-          className="relative z-20 cursor-grab active:cursor-grabbing drop-shadow-2xl"
+          className="absolute z-20 cursor-grab active:cursor-grabbing flex items-center justify-center"
         >
           <motion.img
             key={`current-img-${currentIndex}`}
             src={shirts[currentIndex].src}
             alt={shirts[currentIndex].name}
-            className="w-72 md:w-[350px] h-auto object-contain select-none pointer-events-none drop-shadow-[0_0_15px_rgba(0,0,0,0.2)]"
+            className="w-[350px] md:w-[450px] h-auto object-contain select-none pointer-events-none drop-shadow-[0_0_15px_rgba(0,0,0,0.2)]"
             draggable="false"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -102,10 +103,11 @@ export default function CarouselDioscuro() {
           />
         </motion.div>
 
+        {/* CAPA 15: Playera Siguiente */}
         <motion.img
           key={`next-${currentIndex}`}
           src={shirts[(currentIndex + 1) % shirts.length].src}
-          className="absolute w-64 h-auto opacity-30 blur-[2px] translate-x-32 scale-75 select-none pointer-events-none z-15"
+          className="absolute w-64 md:w-80 h-auto opacity-30 blur-[2px] translate-x-32 md:translate-x-40 scale-75 select-none pointer-events-none z-15"
           initial={{ opacity: 0, x: 100, scale: 0.5 }}
           animate={{ opacity: 0.3, x: 120, scale: 0.75 }}
           transition={{ duration: 0.4 }}
@@ -115,7 +117,7 @@ export default function CarouselDioscuro() {
         <img 
           src="https://vheznlfbhpwzthwklbid.supabase.co/storage/v1/object/public/contenido-dioscuro/contenido-web/manos.webp" 
           alt="Manos" 
-          className="w-[350px] md:w-[450px] h-auto object-contain select-none pointer-events-none drop-shadow-[0_0_15px_rgba(0,0,0,0.2)]"
+          className="absolute w-[350px] md:w-[450px] object-contain z-30 pointer-events-none drop-shadow-2xl" 
         />
       </div>
 
@@ -141,32 +143,4 @@ export default function CarouselDioscuro() {
 
         <div className="flex items-center gap-6">
           <button 
-            onClick={prevSlide}
-            className="w-12 h-12 rounded-full border-2 border-black flex items-center justify-center text-black hover:bg-black hover:text-white transition-all cursor-pointer"
-          >
-            <ChevronLeft size={24} />
-          </button>
-          
-          <span className="text-sm tracking-[0.2em] font-bold text-gray-800 uppercase select-none">
-            Desliza
-          </span>
-
-          <button 
-            onClick={nextSlide}
-            className="w-12 h-12 rounded-full border-2 border-black flex items-center justify-center text-black hover:bg-black hover:text-white transition-all cursor-pointer"
-          >
-            <ChevronRight size={24} />
-          </button>
-        </div>
-
-        <motion.button
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          className="mt-8 px-14 py-4 bg-black text-white font-extrabold uppercase tracking-widest text-sm hover:bg-gray-800 transition-colors cursor-pointer shadow-lg"
-        >
-          Comprar Ahora
-        </motion.button>
-      </div>
-    </div>
-  );
-}
+            onClick={prev
