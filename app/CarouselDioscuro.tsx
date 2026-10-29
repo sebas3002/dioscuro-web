@@ -61,17 +61,14 @@ export default function CarouselDioscuro() {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {/* BLOQUE VISUAL: MODELO Y CARRUSEL */}
       <div className="relative w-full max-w-md h-[450px] flex items-center justify-center perspective-1000 mb-10">
         
-        {/* CAPA 10: Modelo Base */}
         <img 
           src="https://vheznlfbhpwzthwklbid.supabase.co/storage/v1/object/public/contenido-dioscuro/contenido-web/original.webp" 
           alt="Modelo Base" 
           className="absolute w-[350px] md:w-[450px] object-contain z-10 pointer-events-none" 
         />
 
-        {/* CAPA 15: Playera Anterior */}
         <motion.img
           key={`prev-${currentIndex}`}
           src={shirts[(currentIndex - 1 + shirts.length) % shirts.length].src}
@@ -81,7 +78,6 @@ export default function CarouselDioscuro() {
           transition={{ duration: 0.4 }}
         />
 
-        {/* CAPA 20: Playera Central (Activa) */}
         <motion.div
           key={`current-wrapper-${currentIndex}`}
           drag="x"
@@ -103,7 +99,6 @@ export default function CarouselDioscuro() {
           />
         </motion.div>
 
-        {/* CAPA 15: Playera Siguiente */}
         <motion.img
           key={`next-${currentIndex}`}
           src={shirts[(currentIndex + 1) % shirts.length].src}
@@ -113,7 +108,6 @@ export default function CarouselDioscuro() {
           transition={{ duration: 0.4 }}
         />
 
-        {/* CAPA 30: Manos */}
         <img 
           src="https://vheznlfbhpwzthwklbid.supabase.co/storage/v1/object/public/contenido-dioscuro/contenido-web/manos.webp" 
           alt="Manos" 
@@ -121,7 +115,6 @@ export default function CarouselDioscuro() {
         />
       </div>
 
-      {/* BLOQUE UI: TEXTO Y CONTROLES */}
       <div className="relative z-40 flex flex-col items-center text-black text-center mt-8">
         <motion.h2 
           key={`name-${currentIndex}`}
@@ -143,4 +136,32 @@ export default function CarouselDioscuro() {
 
         <div className="flex items-center gap-6">
           <button 
-            onClick={prev
+            onClick={prevSlide}
+            className="w-12 h-12 rounded-full border-2 border-black flex items-center justify-center text-black hover:bg-black hover:text-white transition-all cursor-pointer"
+          >
+            <ChevronLeft size={24} />
+          </button>
+          
+          <span className="text-sm tracking-[0.2em] font-bold text-gray-800 uppercase select-none">
+            Desliza
+          </span>
+
+          <button 
+            onClick={nextSlide}
+            className="w-12 h-12 rounded-full border-2 border-black flex items-center justify-center text-black hover:bg-black hover:text-white transition-all cursor-pointer"
+          >
+            <ChevronRight size={24} />
+          </button>
+        </div>
+
+        <motion.button
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          className="mt-8 px-14 py-4 bg-black text-white font-extrabold uppercase tracking-widest text-sm hover:bg-gray-800 transition-colors cursor-pointer shadow-lg"
+        >
+          Comprar Ahora
+        </motion.button>
+      </div>
+    </div>
+  );
+}
